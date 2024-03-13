@@ -1,3 +1,3 @@
-import {descriptionArray} from './data.js';
+import {getArrayOfObjectDescriptions} from './data.js';
 
-descriptionArray();
+getArrayOfObjectDescriptions();

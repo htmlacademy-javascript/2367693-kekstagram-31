@@ -1,53 +1,21 @@
 import {getRandomUniqueId, getRandomInteger, getRandomArrayElement} from './util.js';
+import {
+  PHOTO_ID, URL_NUMS,
+  COMMENT_ID, AVATAR_NUMBER,
+  NUMBER_OF_LIKES, NUMBER_OF_COMMENTS,
+  NUMBER_OF_THUMBNAILS, LIST_OF_NAMES,
+  PHOTO_DESCRIPTION_LIST, LIST_OF_COMMENTS
+} from './constants.js';
 
-//список имен пользователей
-const LIST_OF_NAMES = [
-  'Шуриком',
-  'Гришей',
-  'Владом',
-  'Злодияр',
-  'Ванила',
-  'Зима',
-  'Близко',
-  'Галактион',
-  'Агуша',
-];
-
-//список описаний к фото
-const PHOTO_DESCRIPTION_LIST = [
-  'со вкусом',
-  'как на картинке',
-  'прекрасно',
-  'приятно',
-  'ярко',
-  'тонко',
-  'превосходно',
-  'искусно',
-  'изящно',
-];
-
-//список комментариев к фото
-const LIST_OF_COMMENTS = [
-  'Всё отлично!',
-  'В целом всё неплохо.',
-  'Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра.',
-  'В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают.',
-  'Как можно было поймать такой неудачный момент?!',
-];
-
-const randomUniquePhotoId = getRandomUniqueId(1, 25);
-const randomUniqueUrlNums = getRandomUniqueId(1, 25);
-const randomUniqueCommentId = getRandomUniqueId(1, 999);
+const randomUniquePhotoId = getRandomUniqueId(PHOTO_ID.min, PHOTO_ID.max);
+const randomUniqueUrlNums = getRandomUniqueId(URL_NUMS.min, URL_NUMS.max);
+const randomUniqueCommentId = getRandomUniqueId(COMMENT_ID.min, COMMENT_ID.max);
 
 //создаст объект для массива с комментариями к фото
 const createCommentedObject = function () {
   return {
     id: randomUniqueCommentId(),
-    avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+    avatar: `img/avatar-${getRandomInteger(AVATAR_NUMBER.min, AVATAR_NUMBER.max)}.svg`,
     message: getRandomArrayElement(LIST_OF_COMMENTS),
     name: getRandomArrayElement(LIST_OF_NAMES),
   };
@@ -59,13 +27,13 @@ const createDescriptiveObject = function () {
     id: randomUniquePhotoId(),
     url: `photos/${randomUniqueUrlNums()}.jpg`,
     description: getRandomArrayElement(PHOTO_DESCRIPTION_LIST),
-    likes: getRandomInteger(15, 200),
-    comments: Array.from({length: getRandomInteger(0, 30)}, createCommentedObject),
+    likes: getRandomInteger(NUMBER_OF_LIKES.min, NUMBER_OF_LIKES.max),
+    comments: Array.from({length: getRandomInteger(NUMBER_OF_COMMENTS.min, NUMBER_OF_COMMENTS.max)}, createCommentedObject),
   };
 };
-
-const descriptionArray = function () {
-  Array.from({length: 25}, createDescriptiveObject);
+// вернет массив из NUMBER_OF_THUMBNAILS объектов с фото
+const getArrayOfObjectDescriptions = function () {
+  return Array.from({length: NUMBER_OF_THUMBNAILS}, createDescriptiveObject);
 };
 
-export {descriptionArray};
+export {getArrayOfObjectDescriptions};

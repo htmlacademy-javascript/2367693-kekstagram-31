@@ -32,8 +32,8 @@ const createDescriptiveObject = function () {
   };
 };
 // вернет массив из NUMBER_OF_THUMBNAILS объектов с фото
-const getArrayOfObjectDescriptions = function () {
+const getPhotosArray = function () {
   return Array.from({length: NUMBER_OF_THUMBNAILS}, createDescriptiveObject);
 };
 
-export {getArrayOfObjectDescriptions};
+export {getPhotosArray};

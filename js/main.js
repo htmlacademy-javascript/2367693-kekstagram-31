@@ -1,3 +1,3 @@
-import {getArrayOfObjectDescriptions} from './data.js';
+import {renderPictures} from './render.js';
 
-getArrayOfObjectDescriptions();
+renderPictures();

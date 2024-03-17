@@ -36,4 +36,6 @@ const getPhotosArray = function () {
   return Array.from({length: NUMBER_OF_THUMBNAILS}, createDescriptiveObject);
 };
 
-export {getPhotosArray};
+const arrayPhotos = getPhotosArray();
+
+export {arrayPhotos};

@@ -1,3 +1,4 @@
-import {renderPictures} from './render.js';
+import {renderGallery} from './gallery.js';
+import {arrayPhotos} from './data.js';
 
-renderPictures();
+renderGallery(arrayPhotos);

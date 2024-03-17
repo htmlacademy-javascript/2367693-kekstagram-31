@@ -28,4 +28,6 @@ const getRandomUniqueId = function (a, b) {
   };
 };
 
-export {getRandomArrayElement, getRandomUniqueId, getRandomInteger};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomArrayElement, getRandomUniqueId, getRandomInteger, isEscapeKey};

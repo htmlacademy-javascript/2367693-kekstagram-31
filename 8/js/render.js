@@ -12,6 +12,7 @@ const createThumbnail = ({id, url, description, likes, comments}) => {
   return pictureTemplateElement;
 };
 
+//Создаст 25 объектов по шаблону, запишет во фрагмент, отрисует при вызове
 const renderThumbnails = (pictures, container) => {
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
@@ -21,4 +22,4 @@ const renderThumbnails = (pictures, container) => {
   container.appendChild(fragment);
 };
 
-export {renderThumbnails};
+export { renderThumbnails };

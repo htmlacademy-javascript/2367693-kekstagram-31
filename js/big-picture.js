@@ -59,7 +59,7 @@ const renderComments = () => {
 //вызовет рендер комментариев, если кнопка "загрузить" нажата
 const onCommentsLoaderClick = () => renderComments();
 
-//сразатывает окно с большим изображением, убирает обработчк на "escape"
+//закрывает окно с большим изображением, убирает обработчк на "escape"
 const hidePicture = () => {
   commentsCountShown = 0;
   bigPictureElement.classList.add('hidden');

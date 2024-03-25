@@ -1,4 +1,9 @@
 import {MAX_HASHTAG_COUNT, VALID_SIMBOLS, ErrorText} from './constants.js';
+import { resetScale } from './scale.js';
+import {
+  init as initEffect,
+  reset as resetEffect
+} from './effect.js';
 
 const bodyElement = document.querySelector('body');
 const formElement = document.querySelector('.img-upload__form');
@@ -16,6 +21,7 @@ const pristine = new Pristine(formElement, {
 
 //откроет редактор изображения если загружен файл
 const showModal = (evt) => {
+  resetScale();
   const file = evt.target.files[0];
   if (file) {
     overlayElement.classList.remove('hidden');
@@ -26,8 +32,9 @@ const showModal = (evt) => {
 
 //закрывает окно с редактирования, убирает обработчк на "escape"
 const hideModal = () => {
-  formElement.reset();
+  resetEffect();
   pristine.reset();
+  formElement.reset();
   overlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -99,3 +106,4 @@ pristine.addValidator(
 cancelButtonElement.addEventListener('click', onCancelButtonClick);
 fileFieldElement.addEventListener('change', onFileInputChange);
 formElement.addEventListener('submit', onFormSubmit);
+initEffect();

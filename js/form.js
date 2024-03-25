@@ -1,4 +1,5 @@
 import {MAX_HASHTAG_COUNT, VALID_SIMBOLS, ErrorText} from './constants.js';
+import { resetScale } from './scale.js';
 import {
   init as initEffect,
   reset as resetEffect
@@ -105,3 +106,4 @@ cancelButtonElement.addEventListener('click', onCancelButtonClick);
 fileFieldElement.addEventListener('change', onFileInputChange);
 formElement.addEventListener('submit', onFormSubmit);
 initEffect();
+resetScale();//<=====!

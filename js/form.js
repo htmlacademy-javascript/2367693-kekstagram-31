@@ -21,6 +21,7 @@ const pristine = new Pristine(formElement, {
 
 //откроет редактор изображения если загружен файл
 const showModal = (evt) => {
+  resetScale();
   const file = evt.target.files[0];
   if (file) {
     overlayElement.classList.remove('hidden');
@@ -106,4 +107,3 @@ cancelButtonElement.addEventListener('click', onCancelButtonClick);
 fileFieldElement.addEventListener('change', onFileInputChange);
 formElement.addEventListener('submit', onFormSubmit);
 initEffect();
-resetScale();//<=====!

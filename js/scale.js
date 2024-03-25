@@ -13,37 +13,41 @@ const imagePreviewElement = previewContainerElement.querySelector('.img-upload__
 //уменьшит масштаб
 const zoomOut = () => {
   let value;
-  const scaleValue = scaleValueElement.value.parseInt();//25,50,75,100
+  const scaleValue = parseInt(scaleValueElement.value, 10);//25,50,75,100
   if (scaleValue <= ScaleControlNumbers.max && scaleValue > ScaleControlNumbers.min) {
     value = scaleValue - ScaleControlNumbers.step;
     return value;
+  } else {
+    return scaleValue;
   }
 };
 
 //увеличит масштаб
 const zoomIn = () => {
   let value;
-  const scaleValue = scaleValueElement.value.parseInt();//25,50,75,100
+  const scaleValue = parseInt(scaleValueElement.value, 10);//25,50,75,100
   if (scaleValue >= ScaleControlNumbers.min && scaleValue < ScaleControlNumbers.max) {
     value = scaleValue + ScaleControlNumbers.step;
     return value;
+  } else {
+    return scaleValue;
   }
 };
 
 const onClickScaleController = (evt) => {
   if (evt.target === scaleSmallerElement) {
     const zoomOutValue = zoomOut();
-    imagePreviewElement.transform.scale = (zoomOutValue / 100);//<======!
-    imagePreviewElement.value = `${zoomOutValue.toString()}%`;
+    imagePreviewElement.style.transform = `scale(${zoomOutValue / 100})`;
+    scaleValueElement.value = `${zoomOutValue.toString()}%`;
   } else if (evt.target === scaleBiggerElement) {
     const zoomInValue = zoomIn();
-    imagePreviewElement.transform.scale = (zoomInValue / 100);//<=======!
-    imagePreviewElement.value = `${zoomInValue.toString()}%`;
+    imagePreviewElement.style.transform = `scale(${zoomInValue / 100})`;
+    scaleValueElement.value = `${zoomInValue.toString()}%`;
   }
 };
 
 const resetScale = () => {
-  imagePreviewElement.transform.scale = (ScaleControlNumbers.max / 100);//<========!
+  imagePreviewElement.style.transform = `scale(${ScaleControlNumbers.max / 100})`;
   previewContainerElement.addEventListener('click', onClickScaleController);
 };
 

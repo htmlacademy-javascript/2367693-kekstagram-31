@@ -24,9 +24,7 @@ const request = async (url, method = HttpMethod.GET, body = null) => {
   return respons.json();
 };
 
-const loadPictures = async () => {
-  request(SERVER_URL + ServerRout.GET_DATA);
-};
+const loadPictures = async () => request(SERVER_URL + ServerRout.GET_DATA);
 
 
 const sendPictures = async (pictureData) => {

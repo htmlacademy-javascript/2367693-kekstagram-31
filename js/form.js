@@ -4,6 +4,14 @@ import {
   init as initEffect,
   reset as resetEffect
 } from './effect.js';
+import { sendPicture } from './api.js';
+import { showSuccessMessage, showErrorMessage } from './message.js';
+import { isEscapeKey } from './util.js';
+
+const SubmitButtonCaption = {
+  SUBMITTING: 'Отправляю...',
+  IDLE: 'Опубликовать',
+};
 
 const bodyElement = document.querySelector('body');
 const formElement = document.querySelector('.img-upload__form');
@@ -12,6 +20,14 @@ const cancelButtonElement = formElement.querySelector('.img-upload__cancel');
 const fileFieldElement = formElement.querySelector('.img-upload__input');
 const hashtagFieldElement = formElement.querySelector('.text__hashtags');
 const commentFieldElement = formElement.querySelector('.text__description');
+const submitButton = formElement.querySelector('.img-upload__submit');
+
+const toggleSubmitButton = (isDisabled) => {
+  submitButton.disabled = isDisabled;
+  submitButton.textContent = isDisabled
+    ? SubmitButtonCaption.SUBMITTING
+    : SubmitButtonCaption.IDLE;
+};
 
 const pristine = new Pristine(formElement, {
   classTo: 'img-upload__field-wrapper',
@@ -20,14 +36,11 @@ const pristine = new Pristine(formElement, {
 });
 
 //откроет редактор изображения если загружен файл
-const showModal = (evt) => {
+const showModal = () => {
   resetScale();
-  const file = evt.target.files[0];
-  if (file) {
-    overlayElement.classList.remove('hidden');
-    bodyElement.classList.add('modal-open');
-    document.addEventListener('keydown', onDocumentKeydown);
-  }
+  overlayElement.classList.remove('hidden');
+  bodyElement.classList.add('modal-open');
+  document.addEventListener('keydown', onDocumentEscapeKeydown);
 };
 
 //закрывает окно с редактирования, убирает обработчк на "escape"
@@ -37,7 +50,7 @@ const hideModal = () => {
   formElement.reset();
   overlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onDocumentEscapeKeydown);
 };
 
 const isTextFieldFocused = () =>
@@ -58,15 +71,15 @@ const hasUniqueTags = (value) => {
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
-//закрое окно, если нажат "escape"
-function onDocumentKeydown (evt) {
-  if (evt.key === 'Escape' && !isTextFieldFocused()) {
+const isErrorMessageExists = () => Boolean(document.querySelector('.error'));
+
+function onDocumentEscapeKeydown (evt) {
+  if (isEscapeKey(evt) && !isTextFieldFocused() && !isErrorMessageExists) {
     evt.preventDefault();
     hideModal();
   }
 }
 
-//закроет окно, если нажат крестик
 const onCancelButtonClick = () => {
   hideModal();
 };
@@ -75,8 +88,25 @@ const onFileInputChange = (evt) => {
   showModal(evt);
 };
 
-const onFormSubmit = () => {
-  pristine.validate();
+const sendForm = async (form) => {
+  if (! pristine.validate()) {
+    return;
+  }
+  try {
+    toggleSubmitButton(true);
+    await sendPicture(new FormData(form));
+    toggleSubmitButton(false);
+    hideModal();
+    showSuccessMessage();
+  } catch (error) {
+    showErrorMessage();
+    toggleSubmitButton(false);
+  }
+};
+
+const onFormSubmit = (evt) => {
+  evt.preventDefault();
+  sendForm(evt.target);
 };
 
 pristine.addValidator(

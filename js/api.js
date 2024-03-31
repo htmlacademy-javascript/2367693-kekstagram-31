@@ -27,12 +27,6 @@ const request = async (url, method = HttpMethod.GET, body = null) => {
 const loadPictures = async () => request(SERVER_URL + ServerRout.GET_DATA);
 
 
-const sendPictures = async (pictureData) => {
-  request(
-    SERVER_URL + ServerRout.SEND_DATA,
-    HttpMethod.POST,
-    pictureData,
-  );
-};
+const sendPicture = async (pictureData) => request(SERVER_URL + ServerRout.SEND_DATA, HttpMethod.POST, pictureData);
 
-export { loadPictures, sendPictures };
+export { loadPictures, sendPicture };

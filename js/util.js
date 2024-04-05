@@ -13,4 +13,14 @@ const showErrorMessage = () => {
   }, REMOVE_MESSAGE_TIMEOUT);
 };
 
-export { showErrorMessage, isEscapeKey };
+const DEBOUNCE_DELAY = 500;
+
+const debounce = (callback, timeoutDelay = DEBOUNCE_DELAY) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { showErrorMessage, isEscapeKey, debounce};

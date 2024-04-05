@@ -13,6 +13,8 @@ const SubmitButtonCaption = {
   IDLE: 'Опубликовать',
 };
 
+// const FILE_TYPES = ['jpg', 'jpeg', 'png', 'gif', 'jfif'];
+
 const bodyElement = document.querySelector('body');
 const formElement = document.querySelector('.img-upload__form');
 const overlayElement = formElement.querySelector('.img-upload__overlay');
@@ -21,6 +23,8 @@ const fileFieldElement = formElement.querySelector('.img-upload__input');
 const hashtagFieldElement = formElement.querySelector('.text__hashtags');
 const commentFieldElement = formElement.querySelector('.text__description');
 const submitButton = formElement.querySelector('.img-upload__submit');
+// const previewElement = document.querySelector('.img-upload__preview img');
+// const previewEffectsList = document.querySelectorAll('.effects__preview');
 
 const toggleSubmitButton = (isDisabled) => {
   submitButton.disabled = isDisabled;
@@ -85,6 +89,19 @@ const onCancelButtonClick = () => {
 };
 
 const onFileInputChange = (evt) => {
+  // const file = fileFieldElement.files[0];
+  // const fileName = file.name.toLowerCase();
+  // const fileExt = fileName.split('.').pop();
+  // const matches = FILE_TYPES.includes(fileExt);
+  // if (matches) {
+  //   const url = URL.createObjectURL(file);
+  //   previewElement.src = url;
+  //   previewEffectsList.forEach((item) => {
+  //     item.style.backgroundImage = `url(${url})`;
+  //   });
+  // } else {
+  //   return;
+  // }
   showModal(evt);
 };
 

@@ -25,7 +25,7 @@ const zoomOut = () => {
 //увеличит масштаб
 const zoomIn = () => {
   let value;
-  const scaleValue = parseInt(scaleValueElement.value, 10);//25,50,75,100
+  const scaleValue = parseInt(scaleValueElement.value, 10);
   if (scaleValue >= ScaleControlNumbers.min && scaleValue < ScaleControlNumbers.max) {
     value = scaleValue + ScaleControlNumbers.step;
     return value;

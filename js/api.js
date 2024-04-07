@@ -1,4 +1,4 @@
-const SERVER_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
+import { SERVER_URL } from './constants.js';
 
 const ServerRout = {
   GET_DATA: '/data',

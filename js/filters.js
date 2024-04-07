@@ -1,21 +1,10 @@
 import { renderGallery } from './gallery.js';
-import { debounce } from './util';
+import { debounce, SortFunctions } from './util';
+import { Filters, MAX_PICTURE_COUNT} from './constants.js';
 
 const filterElement = document. querySelector ('.img-filters');
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 
-const Filters = {
-  DEFAULT: 'filter-default',
-  RANDOM: 'filter-random',
-  DISCUSSED: 'filter-discussed',
-};
-
-const SortFunctions = {
-  RANDOM: () => 0.5 - Math. random (),
-  DISCUSSED: (a, b) => b. comments. length - a. comments. length
-};
-
-const MAX_PICTURE_COUNT = 10;
 let currentFilter = Filters.DEFAULT;
 let pictures = [];
 

@@ -1,19 +1,9 @@
-import {MAX_HASHTAG_COUNT, VALID_SIMBOLS, ErrorText} from './constants.js';
+import { MAX_HASHTAG_COUNT, VALID_SIMBOLS, ErrorText, SubmitButtonCaptions, FILE_TYPES } from './constants.js';
 import { resetScale } from './scale.js';
-import {
-  init as initEffect,
-  reset as resetEffect
-} from './effect.js';
+import { init as initEffect, reset as resetEffect } from './effect.js';
 import { sendPicture } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 import { isEscapeKey } from './util.js';
-
-const SubmitButtonCaption = {
-  SUBMITTING: 'Отправляю...',
-  IDLE: 'Опубликовать',
-};
-
-const FILE_TYPES = ['jpg', 'jpeg', 'png', 'gif', 'jfif'];
 
 const bodyElement = document.querySelector('body');
 const formElement = document.querySelector('.img-upload__form');
@@ -29,8 +19,8 @@ const previewEffectsList = document.querySelectorAll('.effects__preview');
 const toggleSubmitButton = (isDisabled) => {
   submitButton.disabled = isDisabled;
   submitButton.textContent = isDisabled
-    ? SubmitButtonCaption.SUBMITTING
-    : SubmitButtonCaption.IDLE;
+    ? SubmitButtonCaptions.SUBMITTING
+    : SubmitButtonCaptions.IDLE;
 };
 
 const pristine = new Pristine(formElement, {

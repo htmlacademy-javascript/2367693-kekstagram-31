@@ -1,5 +1,19 @@
 export const SERVER_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
+export const ServerRout = {
+  GET_DATA: '/data',
+  SEND_DATA: '/',
+};
+
+export const HttpMethod = {
+  GET: 'GET',
+  POST: 'POST',
+};
+
+export const ErrorText = {
+  [HttpMethod.GET]: 'Не удалось загрузить данные',
+  [HttpMethod.POST]: 'Не удалось отправить форму',
+};
 
 export const COMMENTS_COUNT_SHOW = 5;
 
@@ -7,7 +21,7 @@ export const MAX_HASHTAG_COUNT = 5;
 
 export const VALID_SIMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 
-export const ErrorText = {
+export const ValidationErrorText = {
   INVALID_COUNT: `Максимум ${MAX_HASHTAG_COUNT} хэштегов`,
   NOT_UNIQUE: 'Хэштеги должены быть уникальными',
   INVALID_PATTERN: 'Неправильнай хэштег'

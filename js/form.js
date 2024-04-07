@@ -1,4 +1,4 @@
-import { MAX_HASHTAG_COUNT, VALID_SIMBOLS, ErrorText, SubmitButtonCaptions, FILE_TYPES } from './constants.js';
+import { MAX_HASHTAG_COUNT, VALID_SIMBOLS, ValidationErrorText, SubmitButtonCaptions, FILE_TYPES } from './constants.js';
 import { resetScale } from './scale.js';
 import { init as initEffect, reset as resetEffect } from './effect.js';
 import { sendPicture } from './api.js';
@@ -119,7 +119,7 @@ const onFormSubmit = (evt) => {
 pristine.addValidator(
   hashtagFieldElement,
   hasValidCount,
-  ErrorText.INVALID_COUNT,
+  ValidationErrorText.INVALID_COUNT,
   3,
   true
 );
@@ -127,7 +127,7 @@ pristine.addValidator(
 pristine.addValidator(
   hashtagFieldElement,
   hasUniqueTags,
-  ErrorText.NOT_UNIQUE,
+  ValidationErrorText.NOT_UNIQUE,
   2,
   true
 );
@@ -135,7 +135,7 @@ pristine.addValidator(
 pristine.addValidator(
   hashtagFieldElement,
   hasValidTags,
-  ErrorText.INVALID_PATTERN,
+  ValidationErrorText.INVALID_PATTERN,
   1,
   true
 );

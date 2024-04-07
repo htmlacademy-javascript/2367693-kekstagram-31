@@ -90,14 +90,16 @@ const renderBigPicture = ({ url, description, likes}) => {
 
 //покажет большое изображение
 const showBigPicture = (pictureData) => {
-  bigPictureElement.classList.remove('hidden');
-  bodyElement.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
-  comments = pictureData.comments;
-  if (comments.length >= 0) {
-    renderComments();
+  if (pictureData) {
+    bigPictureElement.classList.remove('hidden');
+    bodyElement.classList.add('modal-open');
+    document.addEventListener('keydown', onDocumentKeydown);
+    comments = pictureData.comments;
+    if (comments.length >= 0) {
+      renderComments();
+    }
+    renderBigPicture(pictureData);
   }
-  renderBigPicture(pictureData);
 };
 
 //подписались на событие по клику на крестик

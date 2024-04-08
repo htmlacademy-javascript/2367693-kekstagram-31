@@ -1,18 +1,18 @@
 export const SERVER_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
-export const ServerRout = {
+export const ServerRouts = {
   GET_DATA: '/data',
   SEND_DATA: '/',
 };
 
-export const HttpMethod = {
+export const HttpMethods = {
   GET: 'GET',
   POST: 'POST',
 };
 
 export const ErrorText = {
-  [HttpMethod.GET]: 'Не удалось загрузить данные',
-  [HttpMethod.POST]: 'Не удалось отправить форму',
+  [HttpMethods.GET]: 'Не удалось загрузить данные',
+  [HttpMethods.POST]: 'Не удалось отправить форму',
 };
 
 export const COMMENTS_COUNT_SHOW = 5;
@@ -96,6 +96,12 @@ export const Filters = {
   DEFAULT: 'filter-default',
   RANDOM: 'filter-random',
   DISCUSSED: 'filter-discussed',
+};
+
+export const ScaleControlNumbers = {
+  MIN: 25,
+  MAX: 100,
+  STEP: 25,
 };
 
 export const MAX_PICTURE_COUNT = 10;

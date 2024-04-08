@@ -12,13 +12,13 @@ const cancelButtonElement = formElement.querySelector('.img-upload__cancel');
 const fileFieldElement = formElement.querySelector('.img-upload__input');
 const hashtagFieldElement = formElement.querySelector('.text__hashtags');
 const commentFieldElement = formElement.querySelector('.text__description');
-const submitButton = formElement.querySelector('.img-upload__submit');
+const submitButtonElement = formElement.querySelector('.img-upload__submit');
 const previewElement = document.querySelector('.img-upload__preview img');
 const previewEffectsList = document.querySelectorAll('.effects__preview');
 
 const toggleSubmitButton = (isDisabled) => {
-  submitButton.disabled = isDisabled;
-  submitButton.textContent = isDisabled
+  submitButtonElement.disabled = isDisabled;
+  submitButtonElement.textContent = isDisabled
     ? SubmitButtonCaptions.SUBMITTING
     : SubmitButtonCaptions.IDLE;
 };

@@ -1,8 +1,4 @@
-const ScaleControlNumbers = {
-  min: 25,
-  max: 100,
-  step: 25,
-};
+import { ScaleControlNumbers } from './constants.js';
 
 const previewContainerElement = document.querySelector('.img-upload__preview-container');
 const scaleSmallerElement = previewContainerElement.querySelector('.scale__control--smaller');
@@ -14,8 +10,8 @@ const imagePreviewElement = previewContainerElement.querySelector('.img-upload__
 const zoomOut = () => {
   let value;
   const scaleValue = parseInt(scaleValueElement.value, 10);//25,50,75,100
-  if (scaleValue <= ScaleControlNumbers.max && scaleValue > ScaleControlNumbers.min) {
-    value = scaleValue - ScaleControlNumbers.step;
+  if (scaleValue <= ScaleControlNumbers.MAX && scaleValue > ScaleControlNumbers.MIN) {
+    value = scaleValue - ScaleControlNumbers.STEP;
     return value;
   } else {
     return scaleValue;
@@ -25,9 +21,9 @@ const zoomOut = () => {
 //увеличит масштаб
 const zoomIn = () => {
   let value;
-  const scaleValue = parseInt(scaleValueElement.value, 10);//25,50,75,100
-  if (scaleValue >= ScaleControlNumbers.min && scaleValue < ScaleControlNumbers.max) {
-    value = scaleValue + ScaleControlNumbers.step;
+  const scaleValue = parseInt(scaleValueElement.value, 10);
+  if (scaleValue >= ScaleControlNumbers.MIN && scaleValue < ScaleControlNumbers.MAX) {
+    value = scaleValue + ScaleControlNumbers.STEP;
     return value;
   } else {
     return scaleValue;
@@ -47,7 +43,7 @@ const onClickScaleController = (evt) => {
 };
 
 const resetScale = () => {
-  imagePreviewElement.style.transform = `scale(${ScaleControlNumbers.max / 100})`;
+  imagePreviewElement.style.transform = `scale(${ScaleControlNumbers.MAX / 100})`;
   previewContainerElement.addEventListener('click', onClickScaleController);
 };
 

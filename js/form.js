@@ -1,19 +1,9 @@
-import {MAX_HASHTAG_COUNT, VALID_SIMBOLS, ErrorText} from './constants.js';
+import { MAX_HASHTAG_COUNT, VALID_SIMBOLS, ValidationErrorText, SubmitButtonCaptions, FILE_TYPES } from './constants.js';
 import { resetScale } from './scale.js';
-import {
-  init as initEffect,
-  reset as resetEffect
-} from './effect.js';
+import { init as initEffect, reset as resetEffect } from './effect.js';
 import { sendPicture } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 import { isEscapeKey } from './util.js';
-
-const SubmitButtonCaption = {
-  SUBMITTING: 'Отправляю...',
-  IDLE: 'Опубликовать',
-};
-
-const FILE_TYPES = ['jpg', 'jpeg', 'png', 'gif', 'jfif'];
 
 const bodyElement = document.querySelector('body');
 const formElement = document.querySelector('.img-upload__form');
@@ -22,15 +12,15 @@ const cancelButtonElement = formElement.querySelector('.img-upload__cancel');
 const fileFieldElement = formElement.querySelector('.img-upload__input');
 const hashtagFieldElement = formElement.querySelector('.text__hashtags');
 const commentFieldElement = formElement.querySelector('.text__description');
-const submitButton = formElement.querySelector('.img-upload__submit');
+const submitButtonElement = formElement.querySelector('.img-upload__submit');
 const previewElement = document.querySelector('.img-upload__preview img');
 const previewEffectsList = document.querySelectorAll('.effects__preview');
 
 const toggleSubmitButton = (isDisabled) => {
-  submitButton.disabled = isDisabled;
-  submitButton.textContent = isDisabled
-    ? SubmitButtonCaption.SUBMITTING
-    : SubmitButtonCaption.IDLE;
+  submitButtonElement.disabled = isDisabled;
+  submitButtonElement.textContent = isDisabled
+    ? SubmitButtonCaptions.SUBMITTING
+    : SubmitButtonCaptions.IDLE;
 };
 
 const pristine = new Pristine(formElement, {
@@ -129,7 +119,7 @@ const onFormSubmit = (evt) => {
 pristine.addValidator(
   hashtagFieldElement,
   hasValidCount,
-  ErrorText.INVALID_COUNT,
+  ValidationErrorText.INVALID_COUNT,
   3,
   true
 );
@@ -137,7 +127,7 @@ pristine.addValidator(
 pristine.addValidator(
   hashtagFieldElement,
   hasUniqueTags,
-  ErrorText.NOT_UNIQUE,
+  ValidationErrorText.NOT_UNIQUE,
   2,
   true
 );
@@ -145,7 +135,7 @@ pristine.addValidator(
 pristine.addValidator(
   hashtagFieldElement,
   hasValidTags,
-  ErrorText.INVALID_PATTERN,
+  ValidationErrorText.INVALID_PATTERN,
   1,
   true
 );

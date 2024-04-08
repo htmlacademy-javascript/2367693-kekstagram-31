@@ -11,7 +11,7 @@ const shownCommentCountElement = bigPictureElement.querySelector('.social__comme
 const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
 const commentElement = document.querySelector('#comment').content.querySelector('.social__comment');
 
-let commentsCountShown = 0;//счётчик комментариев
+let countCommentsShown = 0;//счётчик комментариев
 let comments = [];//комментарии, найденные по id объекта события
 
 //создает 1 комментарий
@@ -26,7 +26,7 @@ const createComment = ({ avatar, message, name }) => {
 };
 //рендер комментариев
 const renderComments = () => {
-  commentsCountShown += COMMENTS_COUNT_SHOW;
+  countCommentsShown += COMMENTS_COUNT_SHOW;
   const fragment = document.createDocumentFragment();
 
   if (comments.length === 0) {
@@ -37,14 +37,14 @@ const renderComments = () => {
     return;
   }
 
-  if (commentsCountShown >= comments.length) {
+  if (countCommentsShown >= comments.length) {
     commentsLoaderElement.classList.add('hidden');
-    commentsCountShown = comments.length;
+    countCommentsShown = comments.length;
   } else {
     commentsLoaderElement.classList.remove('hidden');
   }
 
-  for (let i = 0; i < commentsCountShown; i++) {
+  for (let i = 0; i < countCommentsShown; i++) {
     const comment = createComment(comments[i]);
     fragment.append(comment);
   }
@@ -52,7 +52,7 @@ const renderComments = () => {
   commentsListElement.innerHTML = '';
   commentsListElement.append(fragment);
 
-  shownCommentCountElement.textContent = commentsCountShown;
+  shownCommentCountElement.textContent = countCommentsShown;
   totalCommentCountElement.textContent = comments.length;
 };
 
@@ -61,7 +61,7 @@ const onCommentsLoaderClick = () => renderComments();
 
 //закрывает окно с большим изображением, убирает обработчк на "escape"
 const hidePicture = () => {
-  commentsCountShown = 0;
+  countCommentsShown = 0;
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -90,14 +90,16 @@ const renderBigPicture = ({ url, description, likes}) => {
 
 //покажет большое изображение
 const showBigPicture = (pictureData) => {
-  bigPictureElement.classList.remove('hidden');
-  bodyElement.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
-  comments = pictureData.comments;
-  if (comments.length >= 0) {
-    renderComments();
+  if (pictureData) {
+    bigPictureElement.classList.remove('hidden');
+    bodyElement.classList.add('modal-open');
+    document.addEventListener('keydown', onDocumentKeydown);
+    comments = pictureData.comments;
+    if (comments.length >= 0) {
+      renderComments();
+    }
+    renderBigPicture(pictureData);
   }
-  renderBigPicture(pictureData);
 };
 
 //подписались на событие по клику на крестик

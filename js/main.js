@@ -1,4 +1,3 @@
-// import { arrayPhotos } from './data.js';
 import { renderGallery } from './gallery.js';
 import { loadPictures } from './api.js';
 import { showErrorMessage } from './util.js';

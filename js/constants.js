@@ -1,5 +1,7 @@
 export const SERVER_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
+export const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
+
 export const ServerRouts = {
   GET_DATA: '/data',
   SEND_DATA: '/',

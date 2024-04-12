@@ -1,14 +1,13 @@
-import { renderGallery } from './gallery.js';
+import { reRenderGallery } from './gallery.js';
 import { debounce, SortFunctions } from './util';
-import { Filters, MAX_PICTURE_COUNT} from './constants.js';
+import { Filters, MAX_PICTURE_COUNT, ACTIVE_BUTTON_CLASS } from './constants.js';
 
 const filterElement = document. querySelector ('.img-filters');
-const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
 
 let currentFilter = Filters.DEFAULT;
 let pictures = [];
 
-const debounceRender = debounce(renderGallery);
+const debounceRender = debounce(reRenderGallery);
 
 const onFilterChange = (evt) => {
   const targetButton = evt.target;
